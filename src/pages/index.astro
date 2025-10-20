@@ -3,7 +3,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 
-const name = "主页";
+const name = "blog";
 ---
 
 <html lang="en">
@@ -16,7 +16,11 @@ const name = "主页";
 	</head>
 	<body>
 		<Header />
-		<h2>我的 {name} 站点</h2>
+		<h2>我的 {name} </h2>
 		<Footer />
+		
+		<script>
+			import "../scripts/menu.js"
+		</script>
 	</body>
 </html>
