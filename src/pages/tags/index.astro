@@ -1,18 +1,14 @@
 ---
-import BaseLayout from "./BaseLayout.astro";
-const { frontmatter } = Astro.props;
+import BaseLayout from "../../layouts/BaseLayout.astro";
+const allPosts = await Astro.glob("../posts/*.md");
+const tags = [...new Set(allPosts.map((post) => post.frontmatter.tags).flat())];
+const pageTitle = "标签索引";
 ---
 
-<BaseLayout pageTitle={frontmatter.title}>
-  <p>发表于：{frontmatter.pubDate.toString().slice(0, 10)}</p>
-  <p><em>{frontmatter.description}</em></p>
-  <p>作者：{frontmatter.author}</p>
-
-  <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
-
+<BaseLayout pageTitle={pageTitle}>
   <div class="tags">
     {
-      frontmatter.tags.map((tag: string) => (
+      tags.map((tag) => (
         <p>
           <a class="tag" href={`/tags/${tag}`}>
             {tag}
@@ -21,10 +17,7 @@ const { frontmatter } = Astro.props;
       ))
     }
   </div>
-
-  <slot />
 </BaseLayout>
-
 <style>
   a {
     color: #00539f;
